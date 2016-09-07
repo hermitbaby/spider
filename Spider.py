@@ -43,6 +43,7 @@ class BlogSpider(object):
         count = 0
         length = len(urls)
 
+        filenames = []
         for title, url in urls:
             res = s.get(url)
 
@@ -57,6 +58,7 @@ class BlogSpider(object):
                 # not None
                 s_str = child.string
 
+                # todo: bug: when <p> in <li>, still have duplicated text
                 if s_str:
                     if s_str not in stack:
                         stack.append(s_str)
@@ -70,14 +72,53 @@ class BlogSpider(object):
             print "{} / {}".format(count, length)
 
             dir = "./blogs/"
-            if not os.path.exists(dir):
-                os.makedirs(dir)
+            dir2 = "./blogs_html/"
+            for d in {dir, dir2}:
+                if not os.path.exists(d):
+                    os.makedirs(d)
 
-            filename = u"{}{} - {}".format(dir, str(count).zfill(3), title)
-            f = open(filename, 'w')
-            # "".join([item.string for item in body if item.string])
-            f.write(strs.encode('utf8'))
-            f.close()
+            filename = u"{}{} - {}.txt".format(dir, str(count).zfill(3), title)
+            filename_html = u"{}{} - {}.html".format(dir2, str(count).zfill(3), title)
+
+            if True:
+                # pure text version
+                f = open(filename, 'w')
+                # "".join([item.string for item in body if item.string])
+                f.write(strs.encode('utf8'))
+                f.close()
+
+                # html version
+
+                f = open(filename_html, 'w')
+                # "".join([item.string for item in body if item.string])
+                f.write(res.text.encode('utf8'))
+                f.close()
+
+            filenames.append(filename_html)
+
+        hrefs = []
+        for name in filenames:
+            print name
+            a_href = u"<li><a href='{name}'> {name} </a></li>".format(name=name)
+            hrefs.append(a_href)
+
+        menu = u"""
+                <html>
+                    <head>
+                        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+                    </head>
+                    <body>
+                        <ul>
+                            {}
+                        </ul>
+
+                    </body>
+                </html>
+                """.format("".join(hrefs))
+        f = open('./index.html', 'w')
+        f.write(menu.encode('utf8'))
+        f.close()
+
 
         # print articles
 
