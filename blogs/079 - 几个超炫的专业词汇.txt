@@ -79,11 +79,9 @@ Jenga 是一种非常流行的 party 玩具，如图。它的工作原理是，�
 
 
 Higgs-Bugson
-Higgs-Bugson
 
 
 一种假想中的 bug。它一般是跟据运行日志的少数记录和零星含糊的用户报告推测出来，但是在开发员的机器上很难重现。
-Heisenbug
 Heisenbug
 
 

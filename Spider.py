@@ -44,6 +44,7 @@ class BlogSpider(object):
         length = len(urls)
 
         filenames = []
+        # urls = [urls[-1]]
         for title, url in urls:
             res = s.get(url)
 
@@ -54,9 +55,20 @@ class BlogSpider(object):
 
             strs = u""
             stack = []
+            children = []
+            skip = []
             for child in body.descendants:
                 # not None
                 s_str = child.string
+
+                # if child.name:
+                #     if child.name == 'ol':
+                #         # import pdb;pdb.set_trace()
+                #         children.append(child.name)
+
+                if child.name == 'p' and child.parent.name == 'li':
+                    skip.append(child.name)
+                    continue
 
                 # todo: bug: when <p> in <li>, still have duplicated text
                 if s_str:
@@ -66,6 +78,7 @@ class BlogSpider(object):
                     else:
                         stack.remove(s_str)
 
+            # print skip, title
             # import pdb;pdb.set_trace()
 
             count += 1
@@ -98,7 +111,7 @@ class BlogSpider(object):
 
         hrefs = []
         for name in filenames:
-            print name
+            # print name
             a_href = u"<li><a href='{name}'> {name} </a></li>".format(name=name)
             hrefs.append(a_href)
 

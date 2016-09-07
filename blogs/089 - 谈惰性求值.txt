@@ -8,16 +8,12 @@
 
 
 复杂的基于缩进的语法，使得任何编辑器都不能高效的编辑 Haskell 程序，并且使得语法分析难度加倍。对这个观点，请参考我的博文《谈语法》以及我的英文博文《Layout Syntax Considered Harmful》。
-复杂的基于缩进的语法，使得任何编辑器都不能高效的编辑 Haskell 程序，并且使得语法分析难度加倍。对这个观点，请参考我的博文《谈语法》以及我的英文博文《Layout Syntax Considered Harmful》。
 
 
 “纯函数式”的语义以及 monad 其实不是好东西。对此请参考博文《对函数式语言的误解》。
-“纯函数式”的语义以及 monad 其实不是好东西。对此请参考博文《对函数式语言的误解》。
-Haskell 所用的 Hindley-Milner 类型系统，其实含有一个根本性的错误。对此请参考《Hindley-Milner 类型系统的根本性错误》。
 Haskell 所用的 Hindley-Milner 类型系统，其实含有一个根本性的错误。对此请参考《Hindley-Milner 类型系统的根本性错误》。
 
 
-Haskell 所用的 type class，其实跟一般语言（比如 Java）里面的重载（overloading）并没有本质区别。你看到的区别都是因为 Hindley-Milner 系统和重载混合在一起产生的效果。type class 并不能比其它语言里的重载做更多的事。
 Haskell 所用的 type class，其实跟一般语言（比如 Java）里面的重载（overloading）并没有本质区别。你看到的区别都是因为 Hindley-Milner 系统和重载混合在一起产生的效果。type class 并不能比其它语言里的重载做更多的事。
 
 
